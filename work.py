@@ -36,17 +36,17 @@ def etl(valor,i):
     # Concatenar todos los DataFrames en uno solo
     dataframe_concatenado = pd.concat(dataframes, ignore_index=True)
     dataframe_concatenado.columns= ['phrase']
-    dataframe_concatenado['target'] = keys_segundarias[i]
+    dataframe_concatenado['sentiment'] = keys_segundarias[i]
     return dataframe_concatenado
 
 
 tabla = [] 
 for i in range(1,4):
     tabla.append(etl('train',i))
-pd.concat(tabla, ignore_index=True).to_csv('train_dataset.csv')
+pd.concat(tabla, ignore_index=True).to_csv('train_dataset.csv', index=False)
 
 
 tabla = [] 
 for i in range(1,4):
     tabla.append(etl('test',i))
-pd.concat(tabla, ignore_index=True).to_csv('test_dataset.csv')
+pd.concat(tabla, ignore_index=True).to_csv('test_dataset.csv', index=False)
